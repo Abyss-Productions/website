@@ -1,0 +1,61 @@
+/*
+ * Abyss Productions — design tokens.
+ * Every colour is sampled from the studio logo: teal crystal facets, an
+ * indigo-violet mass, magenta arcs and a warm core.
+ */
+
+:root {
+  /* Depths — the page darkens and shifts violet as you descend */
+  --void: #04050d;
+  --deep: #0a0e22;
+  --stratum: #141135;
+  --abyssal: #170f2e;
+
+  /* Crystal */
+  --shard: #3fe0ce;
+  --shard-dim: #2aa79a;
+  --ice: #a9e8ff;
+
+  /* Rare accents. The arc is for live states, the core for one moment only. */
+  --arc: #ff4b9f;
+  --core: #ffb25c;
+
+  /* Text */
+  --lumen: #e8edff;
+  --fathom: #8b95c4;
+  --fathom-dim: #5c648f;
+
+  /* Surfaces */
+  --pane: rgb(255 255 255 / 0.028);
+  --pane-lift: rgb(255 255 255 / 0.055);
+  --edge: rgb(169 232 255 / 0.11);
+  --edge-lift: rgb(63 224 206 / 0.38);
+
+  /* Type */
+  --display: 'Anybody', 'Arial Narrow', sans-serif;
+  --body: 'Familjen Grotesk', 'Segoe UI', system-ui, sans-serif;
+  --utility: 'Martian Mono', ui-monospace, 'Cascadia Mono', monospace;
+
+  /* Type scale — fluid, clamped at both ends */
+  --step--1: clamp(0.78rem, 0.76rem + 0.1vw, 0.84rem);
+  --step-0: clamp(1rem, 0.96rem + 0.18vw, 1.09rem);
+  --step-1: clamp(1.2rem, 1.11rem + 0.4vw, 1.45rem);
+  --step-2: clamp(1.55rem, 1.34rem + 0.9vw, 2.1rem);
+  --step-3: clamp(2rem, 1.55rem + 2vw, 3.2rem);
+  --step-4: clamp(2.9rem, 1.9rem + 4.6vw, 6.4rem);
+
+  /* Rhythm */
+  --gutter: clamp(1.25rem, 4vw, 3rem);
+  --measure: 62ch;
+  --shell: 1240px;
+  --rail: 86px;
+  --section-y: clamp(5.5rem, 11vh, 9.5rem);
+
+  /* Motion */
+  --ease: cubic-bezier(0.22, 0.68, 0.24, 1);
+  --slow: 900ms;
+
+  /* Scroll progress, 0 at the surface and 1 at the seabed.
+     Set from JS on <html>; the background layers read it. */
+  --descent: 0;
+}

@@ -1,0 +1,40 @@
+.stratum {
+  position: relative;
+  padding-block: var(--section-y);
+  border-top: 1px solid var(--edge);
+}
+
+.head {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: clamp(2.5rem, 6vh, 4rem);
+}
+
+.depth {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: var(--shard);
+  font-size: 0.58rem;
+  letter-spacing: 0.22em;
+}
+
+.reading {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.rule {
+  flex: 1;
+  height: 1px;
+  max-width: 8rem;
+  background: linear-gradient(to right, rgb(63 224 206 / 0.6), transparent);
+}
+
+.heading {
+  font-size: var(--step-3);
+}
+
+.intro {
+  max-width: 52ch;
+}

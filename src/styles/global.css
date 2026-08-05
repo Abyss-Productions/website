@@ -1,0 +1,145 @@
+@import './tokens.css';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* The gauge is fixed to the left edge, so anchored sections need headroom. */
+  scroll-padding-top: 6rem;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  min-height: 100vh;
+  background: var(--void);
+  color: var(--lumen);
+  font-family: var(--body);
+  font-size: var(--step-0);
+  line-height: 1.62;
+  font-synthesis: none;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* The backdrop is a fixed layer at z-index 0. Anything that is not itself
+   positioned paints underneath it, so the content column is lifted above. */
+main {
+  position: relative;
+  z-index: 1;
+}
+
+/* The depth gauge is fixed to the left edge on wide viewports, so the whole
+   document is inset past it. Below 900px the gauge becomes a top hairline and
+   the inset is dropped — see DepthGauge.module.css. */
+@media (min-width: 901px) {
+  #root {
+    padding-left: var(--rail);
+  }
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--shard);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+::selection {
+  background: var(--shard);
+  color: var(--void);
+}
+
+/* Display type: Anybody is a variable-width face — the wide axis is what
+   gives the headings their faceted, pressed-outward look. */
+.display {
+  font-family: var(--display);
+  font-variation-settings: 'wdth' 112;
+  font-weight: 800;
+  line-height: 0.92;
+  letter-spacing: -0.022em;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+/* Utility type: depth readouts, labels, status pills. */
+.utility {
+  font-family: var(--utility);
+  font-size: var(--step--1);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+
+.lede {
+  font-size: var(--step-1);
+  line-height: 1.5;
+  color: var(--fathom);
+  max-width: 46ch;
+  text-wrap: pretty;
+}
+
+.shell {
+  width: 100%;
+  max-width: var(--shell);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.skip-link {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  translate: -50% -120%;
+  z-index: 100;
+  padding: 0.75rem 1.25rem;
+  background: var(--shard);
+  color: var(--void);
+  font-family: var(--utility);
+  font-size: var(--step--1);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  transition: translate 200ms var(--ease);
+}
+
+.skip-link:focus {
+  translate: -50% 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

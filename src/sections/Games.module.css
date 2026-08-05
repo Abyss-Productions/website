@@ -1,0 +1,15 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr));
+  gap: clamp(1.25rem, 2.5vw, 1.75rem);
+  list-style: none;
+  padding: 0;
+}
+
+.item {
+  display: flex;
+}
+
+.item > * {
+  width: 100%;
+}

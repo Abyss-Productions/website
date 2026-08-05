@@ -1,0 +1,148 @@
+.gauge {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 20;
+  width: var(--rail);
+  display: grid;
+  grid-template-rows: auto 1fr;
+  align-items: center;
+  justify-items: center;
+  padding-block: clamp(5rem, 12vh, 8rem) 4.75rem;
+  border-right: 1px solid var(--edge);
+  background: linear-gradient(to right, rgb(4 5 13 / 0.9), rgb(4 5 13 / 0));
+  pointer-events: none;
+}
+
+/* Depth readout, rotated so it reads along the rail. */
+.readout {
+  display: flex;
+  align-items: baseline;
+  gap: 0.15em;
+  font-family: var(--utility);
+  font-variant-numeric: tabular-nums;
+  color: var(--shard);
+  text-shadow: 0 0 18px rgb(63 224 206 / 0.45);
+}
+
+.value {
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.unit {
+  font-size: 0.5rem;
+  color: var(--shard-dim);
+}
+
+.rail {
+  position: relative;
+  width: 1px;
+  height: 100%;
+  margin-block: 2.75rem 0;
+  background: linear-gradient(
+    to bottom,
+    rgb(169 232 255 / 0.06),
+    rgb(169 232 255 / 0.22),
+    rgb(169 232 255 / 0.06)
+  );
+}
+
+/* Descended portion of the rail, scaled from the top rather than animated in JS. */
+.fill {
+  position: absolute;
+  inset: 0;
+  transform-origin: top;
+  background: linear-gradient(to bottom, var(--shard-dim), var(--shard));
+  box-shadow: 0 0 12px rgb(63 224 206 / 0.6);
+}
+
+.marker {
+  position: absolute;
+  left: 50%;
+  width: 7px;
+  height: 7px;
+  translate: -50% -50%;
+  rotate: 45deg;
+  background: var(--shard);
+  box-shadow: 0 0 14px 2px rgb(63 224 206 / 0.75);
+}
+
+.tick {
+  position: absolute;
+  left: 50%;
+  width: 11px;
+  height: 1px;
+  translate: -50% 0;
+  background: rgb(169 232 255 / 0.3);
+  transition: background 400ms var(--ease);
+}
+
+.tick[data-passed] {
+  background: var(--shard);
+}
+
+/* Stratum names run vertically beside the rail. */
+.tickLabel {
+  position: absolute;
+  left: 1.4rem;
+  top: 0;
+  font-family: var(--utility);
+  font-size: 0.5rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--fathom-dim);
+  writing-mode: vertical-rl;
+  translate: 0 -0.4rem;
+  transition: color 400ms var(--ease);
+}
+
+/* Grows upward from its tick, mirroring the offset, so the last stratum's name
+   stays inside the viewport. */
+.tick[data-anchor='end'] .tickLabel {
+  top: auto;
+  bottom: 0;
+  translate: 0 0.4rem;
+}
+
+.tick[data-passed] .tickLabel {
+  color: var(--ice);
+}
+
+/* Below the shell width the rail would crowd the content, so the gauge
+   collapses to a hairline of progress across the top of the viewport. */
+@media (max-width: 900px) {
+  .gauge {
+    inset: 0 0 auto 0;
+    width: 100%;
+    height: 2px;
+    padding: 0;
+    border-right: none;
+    background: rgb(169 232 255 / 0.1);
+    display: block;
+  }
+
+  .readout,
+  .tickLabel,
+  .marker,
+  .tick {
+    display: none;
+  }
+
+  .rail {
+    width: 100%;
+    height: 2px;
+    margin: 0;
+    background: none;
+  }
+
+  .fill {
+    transform-origin: left;
+    scale: var(--descent) 1 !important;
+    background: linear-gradient(to right, var(--shard-dim), var(--shard));
+  }
+}

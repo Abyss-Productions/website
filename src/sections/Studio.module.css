@@ -1,0 +1,75 @@
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: start;
+}
+
+.prose {
+  display: grid;
+  gap: 1.35rem;
+  max-width: var(--measure);
+  color: var(--fathom);
+  text-wrap: pretty;
+}
+
+/* First paragraph carries the weight, so it is set larger and lighter. */
+.opening {
+  font-size: var(--step-1);
+  line-height: 1.5;
+  color: var(--lumen);
+}
+
+/* Spec panel: plain rows, read as an instrument panel rather than a card. */
+.spec {
+  border: 1px solid var(--edge);
+  background: var(--pane);
+  padding: clamp(1.25rem, 2.5vw, 1.85rem);
+  clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%);
+}
+
+.specTitle {
+  font-size: 0.52rem;
+  letter-spacing: 0.22em;
+  color: var(--shard);
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--edge);
+}
+
+.facts {
+  display: grid;
+}
+
+.fact {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block: 0.85rem;
+  border-bottom: 1px dashed rgb(169 232 255 / 0.09);
+}
+
+.fact:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.factLabel {
+  font-size: 0.52rem;
+  letter-spacing: 0.18em;
+  color: var(--fathom-dim);
+}
+
+.factValue {
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
+  color: var(--lumen);
+  text-align: right;
+  text-transform: none;
+}
+
+@media (max-width: 860px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}

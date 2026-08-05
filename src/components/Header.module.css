@@ -1,0 +1,118 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  background: linear-gradient(to bottom, rgb(4 5 13 / 0.82), rgb(4 5 13 / 0));
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  max-width: var(--shell);
+  margin-inline: auto;
+  padding: 1.1rem var(--gutter);
+  border-bottom: 1px solid var(--edge);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.mark {
+  width: 34px;
+  height: auto;
+  filter: drop-shadow(0 0 10px rgb(63 224 206 / 0.4));
+  transition: filter 500ms var(--ease);
+}
+
+.brand:hover .mark {
+  filter: drop-shadow(0 0 16px rgb(63 224 206 / 0.75));
+}
+
+.wordmark {
+  display: grid;
+  gap: 0.15rem;
+}
+
+.word {
+  font-family: var(--display);
+  font-variation-settings: 'wdth' 105;
+  font-weight: 800;
+  font-size: 1.02rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.role {
+  font-family: var(--utility);
+  font-size: 0.52rem;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--fathom-dim);
+  line-height: 1;
+}
+
+.nav {
+  display: flex;
+  gap: clamp(1rem, 3vw, 2.2rem);
+}
+
+.link {
+  position: relative;
+  font-family: var(--utility);
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--fathom);
+  padding-block: 0.35rem;
+  transition: color 300ms var(--ease);
+}
+
+.link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: var(--shard);
+  scale: 0 1;
+  transform-origin: left;
+  transition: scale 320ms var(--ease);
+}
+
+.link:hover,
+.link[aria-current='page'] {
+  color: var(--ice);
+}
+
+.link:hover::after,
+.link[aria-current='page']::after {
+  scale: 1 1;
+}
+
+@media (max-width: 900px) {
+  .role {
+    display: none;
+  }
+}
+
+@media (max-width: 420px) {
+  .nav {
+    gap: 0.9rem;
+  }
+
+  .link {
+    font-size: 0.55rem;
+    letter-spacing: 0.12em;
+  }
+}
