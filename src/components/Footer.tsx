@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom'
 import logo from '../assets/logo.png'
-import { MAX_DEPTH, site } from '../data/site'
-import { formatMetres } from '../lib/format'
+import { site } from '../data/site'
 import styles from './Footer.module.css'
 
 export function Footer() {

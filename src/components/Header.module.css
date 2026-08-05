@@ -100,6 +100,90 @@
   scale: 1 1;
 }
 
+/* --- Menu toggle: phone only, so hidden until the query below --- */
+.toggle {
+  display: none;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: var(--utility);
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--fathom);
+  transition: color 300ms var(--ease);
+}
+
+.toggle:hover,
+.toggle[aria-expanded='true'] {
+  color: var(--ice);
+}
+
+.toggleLabel {
+  line-height: 1;
+}
+
+.shards {
+  display: grid;
+  align-content: space-between;
+  justify-items: end;
+  width: 22px;
+  height: 14px;
+  flex: none;
+}
+
+/* Uneven lengths, and each end cleaved on the diagonal — the same geometry as
+   the facets in the mark. They take their colour from the button. */
+.shards > span {
+  width: 100%;
+  height: 1.5px;
+  background: currentColor;
+  clip-path: polygon(0 0, 100% 0, calc(100% - 4px) 100%, 4px 100%);
+  transition:
+    width 300ms var(--ease),
+    translate 300ms var(--ease),
+    rotate 300ms var(--ease),
+    scale 200ms var(--ease),
+    opacity 200ms var(--ease);
+}
+
+.shards > span:nth-child(2) {
+  width: 62%;
+}
+
+.shards > span:nth-child(3) {
+  width: 82%;
+}
+
+/* Open: the outer two even up and cross, the middle one shatters out. */
+.toggle[aria-expanded='true'] .shards > span {
+  width: 100%;
+}
+
+.toggle[aria-expanded='true'] .shards > span:nth-child(1) {
+  translate: 0 6.25px;
+  rotate: 45deg;
+}
+
+.toggle[aria-expanded='true'] .shards > span:nth-child(2) {
+  opacity: 0;
+  scale: 0.3 1;
+}
+
+.toggle[aria-expanded='true'] .shards > span:nth-child(3) {
+  translate: 0 -6.25px;
+  rotate: -45deg;
+}
+
+/* --- Scrim behind the open panel --- */
+.scrim {
+  display: none;
+}
+
 @media (max-width: 900px) {
   .role {
     display: none;
@@ -115,13 +199,128 @@
   }
 }
 
-@media (max-width: 420px) {
+/* --- Phone: the links move into a drop panel --- */
+@media (max-width: 600px) {
+  .toggle {
+    display: inline-flex;
+  }
+
+  /* The full wordmark plus a toggle is tight at this width. */
+  .word {
+    font-size: 0.85rem;
+    letter-spacing: 0.09em;
+  }
+
+  .scrim {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 25;
+    background: rgb(4 5 13 / 0.55);
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      opacity 280ms var(--ease),
+      visibility 280ms;
+  }
+
+  .scrim[data-open] {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* Drops out of the header's lower edge. `visibility` rather than `display`
+     keeps the links out of the tab order while closed without needing to know
+     the viewport width in JS. */
   .nav {
-    gap: 0.9rem;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    display: grid;
+    gap: 0;
+    padding: 0.35rem var(--gutter) 1.1rem;
+    background: linear-gradient(to bottom, rgb(10 14 34 / 0.98), rgb(4 5 13 / 0.98));
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border-bottom: 1px solid var(--edge-lift);
+    box-shadow: 0 26px 50px -26px rgb(4 5 13 / 0.9);
+    /* Cleaved corner, matching the cards and buttons. */
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 18px), calc(100% - 18px) 100%, 0 100%);
+    opacity: 0;
+    visibility: hidden;
+    translate: 0 -0.6rem;
+    transition:
+      opacity 280ms var(--ease),
+      translate 280ms var(--ease),
+      visibility 280ms;
+  }
+
+  .nav[data-open] {
+    opacity: 1;
+    visibility: visible;
+    translate: none;
   }
 
   .link {
-    font-size: 0.55rem;
-    letter-spacing: 0.12em;
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    padding-block: 1.05rem;
+    font-size: var(--label);
+    letter-spacing: 0.2em;
+    border-bottom: 1px dashed rgb(169 232 255 / 0.09);
+    opacity: 0;
+    translate: 0 -0.35rem;
+    /* Only the entrance is staggered — colour still reacts to touch at once. */
+    transition:
+      color 300ms var(--ease),
+      opacity 320ms var(--ease) var(--stagger, 0ms),
+      translate 320ms var(--ease) var(--stagger, 0ms);
+  }
+
+  .link:last-child {
+    border-bottom: none;
+  }
+
+  /* The sliding underline is replaced by a shard marker, echoing the marker on
+     the depth gauge. */
+  .link::after {
+    display: none;
+  }
+
+  .link::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    flex: none;
+    rotate: 45deg;
+    background: var(--fathom-dim);
+    transition:
+      background 300ms var(--ease),
+      box-shadow 300ms var(--ease);
+  }
+
+  .link:hover::before,
+  .link[aria-current='page']::before {
+    background: var(--shard);
+    box-shadow: 0 0 10px rgb(63 224 206 / 0.8);
+  }
+
+  .nav[data-open] .link {
+    opacity: 1;
+    translate: none;
+  }
+
+  .nav[data-open] .link:nth-child(1) {
+    --stagger: 70ms;
+  }
+
+  .nav[data-open] .link:nth-child(2) {
+    --stagger: 120ms;
+  }
+
+  .nav[data-open] .link:nth-child(3) {
+    --stagger: 170ms;
   }
 }

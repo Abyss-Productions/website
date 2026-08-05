@@ -64,11 +64,6 @@
 }
 
 @media (max-width: 600px) {
-  /* No depth readings on a phone — see Stratum.module.css. */
-  .reading {
-    display: none;
-  }
-
   /* The three rows stack, so they centre on a shared axis. */
   .inner {
     justify-content: center;
