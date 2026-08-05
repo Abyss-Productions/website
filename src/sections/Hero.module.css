@@ -139,12 +139,6 @@
   display: grid;
   place-items: center;
   isolation: isolate;
-  /* The bloom below is inset -14%, so it is wider than this box and would push
-     the page out at any width where the stage reaches the viewport edge. Clip
-     it horizontally only — it still needs to bleed above and below the shard.
-     Both gradients are fully transparent by the time they reach these edges,
-     so nothing visible is cut. */
-  overflow-x: clip;
 }
 
 .shard {
@@ -156,14 +150,19 @@
   animation: hover 13s ease-in-out infinite alternate;
 }
 
-/* Cold light thrown by the crystal. */
+/* Cold light thrown by the crystal.
+   The box bleeds vertically but stops exactly at the stage's left and right
+   edges, so it can never widen the page. Clipping it instead would cut the
+   blurred gradient mid-fade and leave a hard seam down each side.
+   The horizontal radii are scaled by 1.28 to compensate for the narrower box,
+   so the glow keeps the same reach it had when the box overhung by 14%. */
 .bloom {
   position: absolute;
   z-index: 1;
-  inset: -14%;
+  inset: -14% 0;
   background:
-    radial-gradient(46% 46% at 50% 46%, rgb(63 224 206 / 0.3), transparent 70%),
-    radial-gradient(62% 58% at 50% 58%, rgb(112 78 232 / 0.26), transparent 72%);
+    radial-gradient(59% 46% at 50% 46%, rgb(63 224 206 / 0.3), transparent 70%),
+    radial-gradient(79% 58% at 50% 58%, rgb(112 78 232 / 0.26), transparent 72%);
   filter: blur(18px);
   animation: breathe 9s ease-in-out infinite alternate;
 }

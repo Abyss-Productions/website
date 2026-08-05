@@ -18,7 +18,7 @@ export function Header() {
         <Link to="/" className={styles.brand} aria-label={`${site.name} — home`}>
           <img src={logo} alt="" className={styles.mark} width={34} height={37} />
           <span className={styles.wordmark}>
-            <span className={styles.word}>Abyss</span>
+            <span className={styles.word}>Abyss Productions</span>
             <span className={styles.role}>{site.role}</span>
           </span>
         </Link>

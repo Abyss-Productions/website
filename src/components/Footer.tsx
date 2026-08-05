@@ -13,10 +13,7 @@ export function Footer() {
           <div>
             <p className={`display ${styles.name}`}>{site.name}</p>
             <p className={`utility ${styles.seabed}`}>
-              Seabed
-              {/* Split out so the depth reading can drop away on a phone, where
-                  the rest of the site's readings are hidden too. */}
-              <span className={styles.reading}>{` — ${formatMetres(MAX_DEPTH)} m`}</span>
+              Mobile Games Studio
             </p>
           </div>
         </div>
