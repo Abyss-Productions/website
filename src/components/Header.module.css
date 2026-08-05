@@ -3,8 +3,12 @@
   top: 0;
   z-index: 30;
   background: linear-gradient(to bottom, rgb(4 5 13 / 0.82), rgb(4 5 13 / 0));
+  /* Do not hand-write -webkit-backdrop-filter next to this. The build treats the
+     prefixed form as the same property and keeps only the last one declared, so
+     writing the standard property first silently drops it from the production
+     bundle — which reads as "the blur works locally but not once deployed".
+     The bundler adds the prefix itself, in the correct order. */
   backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
 }
 
 .inner {
@@ -241,8 +245,8 @@
     gap: 0;
     padding: 0.35rem var(--gutter) 1.1rem;
     background: linear-gradient(to bottom, rgb(10 14 34 / 0.98), rgb(4 5 13 / 0.98));
+    /* Prefix is added by the build — see the note on .header. */
     backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
     border-bottom: 1px solid var(--edge-lift);
     box-shadow: 0 26px 50px -26px rgb(4 5 13 / 0.9);
     /* Cleaved corner, matching the cards and buttons. */

@@ -79,7 +79,9 @@ Two CSS notes worth keeping in mind:
 The build output in `dist/` is static. Because routing is client-side, the host has to serve
 `index.html` for unknown paths or a hard refresh of `/privacy` will 404:
 
-- **Netlify / Cloudflare Pages** — `public/_redirects` is already set up.
+- **Netlify / Cloudflare Pages** — `public/_redirects` is already set up. `netlify.toml` pins the
+  build command and turns Netlify's asset post-processing off, since Vite has already minified the
+  output and a second pass can mangle modern CSS.
 - **Vercel** — `vercel.json` is already set up.
 - **GitHub Pages / plain nginx** — add your own rewrite to `index.html`.
 

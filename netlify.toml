@@ -1,0 +1,13 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+# Vite already minifies CSS and JS. Netlify's own post-processing would be a
+# second pass over already-optimised output, and its CSS minifier has a history
+# of mangling modern properties — the kind of failure that only shows up once
+# deployed. Leave it off.
+[build.processing]
+  skip_processing = true
+
+# Client-side routing is handled by public/_redirects, which ships in the build
+# output. Kept there rather than duplicated here so there is one source of truth.
