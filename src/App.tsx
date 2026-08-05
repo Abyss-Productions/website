@@ -1,9 +1,11 @@
 import { useEffect } from 'react'
 import { Route, Routes, useLocation } from 'react-router-dom'
 import { Backdrop } from './components/Backdrop'
+import { DepthGauge } from './components/DepthGauge'
 import { Footer } from './components/Footer'
 import { Header } from './components/Header'
-import { site } from './data/site'
+import { site, strata } from './data/site'
+import { useDescent } from './hooks/useDescent'
 import { Home } from './pages/Home'
 import { NotFound } from './pages/NotFound'
 import { Privacy } from './pages/Privacy'
@@ -14,6 +16,11 @@ const TITLES: Record<string, string> = {
   '/support': `Player support — ${site.name}`,
   '/privacy': `Privacy policy — ${site.name}`,
 }
+
+// Module scope, so each identity is stable across renders.
+const HOME_SECTIONS = strata.map((stratum) => stratum.id)
+const NO_SECTIONS: readonly string[] = []
+const NO_MARKERS = [] as const
 
 /**
  * Puts the viewport where the visitor expects it after a route change, and
@@ -41,6 +48,13 @@ function RouteEffects() {
 }
 
 export default function App() {
+  const { pathname } = useLocation()
+  const isHome = pathname === '/'
+
+  // The gauge tracks every page. Only the front page has named strata to stamp
+  // on the rail; elsewhere it reads as a plain descent.
+  const { progress, active } = useDescent(isHome ? HOME_SECTIONS : NO_SECTIONS)
+
   return (
     <>
       <Backdrop />
@@ -49,6 +63,7 @@ export default function App() {
         Skip to content
       </a>
       <Header />
+      <DepthGauge progress={progress} active={active} markers={isHome ? strata : NO_MARKERS} />
       <main id="main">
         <Routes>
           <Route path="/" element={<Home />} />

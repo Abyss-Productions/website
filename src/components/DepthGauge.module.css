@@ -118,6 +118,8 @@
 @media (max-width: 900px) {
   .gauge {
     inset: 0 0 auto 0;
+    /* Above the sticky header, or the hairline sits behind its backdrop. */
+    z-index: 40;
     width: 100%;
     height: 2px;
     padding: 0;

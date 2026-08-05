@@ -48,10 +48,14 @@ it is empty, the section shows a mail-us button instead of a form that silently 
 
 ## Design
 
-The page is built as a descent. A depth gauge is fixed to the left edge and reads out how far down
-the visitor has scrolled; each section is a stratum stamped with its own depth, and the background
-fades from surface light to violet pressure as you go. Depths are set in `strata` in
-`src/data/site.ts` — the gauge, the section headers and the footer all read from it.
+The site is built as a descent. A depth gauge is fixed to the left edge and reads out how far down
+the visitor has scrolled; on the front page each section is a stratum stamped with its own depth,
+and the background fades from surface light to violet pressure as you go. Depths are set in `strata`
+in `src/data/site.ts` — the gauge, the section headers and the footer all read from it.
+
+The gauge lives in `App.tsx`, above the routes, so it tracks every page. Its labelled ticks are a
+prop: the front page passes `strata`, and the text pages pass none, which leaves a bare rail with
+the readout, fill and marker. Below 900px it collapses to a progress hairline across the top.
 
 - **Colour** is sampled from the logo: teal crystal (`--shard`), indigo-violet depths, magenta
   arcs for live states, and one warm core (`--core`) used only behind the hero.
