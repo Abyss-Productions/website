@@ -6,7 +6,7 @@
 
 export const site = {
   name: 'Abyss Productions',
-  shortName: 'Abyss',
+  shortName: 'Abyss Productions',
   role: 'Mobile games studio',
   domain: 'https://abyssproductions.com',
   description:
