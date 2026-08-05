@@ -104,6 +104,15 @@
   .role {
     display: none;
   }
+
+  /* Trade some of the bar's own padding for taller hit areas on the links. */
+  .inner {
+    padding-block: 0.8rem;
+  }
+
+  .link {
+    padding-block: 0.7rem;
+  }
 }
 
 @media (max-width: 420px) {

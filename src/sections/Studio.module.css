@@ -29,8 +29,8 @@
 }
 
 .specTitle {
-  font-size: 0.52rem;
-  letter-spacing: 0.22em;
+  font-size: var(--label);
+  letter-spacing: 0.2em;
   color: var(--shard);
   padding-bottom: 1rem;
   border-bottom: 1px solid var(--edge);
@@ -55,14 +55,14 @@
 }
 
 .factLabel {
-  font-size: 0.52rem;
-  letter-spacing: 0.18em;
+  font-size: var(--label-sm);
+  letter-spacing: 0.16em;
   color: var(--fathom-dim);
 }
 
 .factValue {
-  font-size: 0.6rem;
-  letter-spacing: 0.08em;
+  font-size: var(--label-lg);
+  letter-spacing: 0.06em;
   color: var(--lumen);
   text-align: right;
   text-transform: none;

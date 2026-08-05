@@ -15,6 +15,14 @@ html {
   /* The gauge is fixed to the left edge, so anchored sections need headroom. */
   scroll-padding-top: 6rem;
   -webkit-text-size-adjust: 100%;
+  /* Backstop against a stray decorative layer widening the page and leaving a
+     dead strip down the right-hand side. `clip` rather than `hidden`: hidden on
+     one axis forces the other to `auto`, which makes the element a scroll
+     container — that is what stopped the old `body { overflow-x: hidden }` from
+     working, since the viewport then still reported the wider scroll area.
+     `clip` creates no scroll container, so sticky headers and the fixed depth
+     gauge are unaffected. */
+  overflow-x: clip;
 }
 
 body {
@@ -26,7 +34,7 @@ body {
   line-height: 1.62;
   font-synthesis: none;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 /* The backdrop is a fixed layer at z-index 0. Anything that is not itself
@@ -73,9 +81,19 @@ input {
   color: var(--void);
 }
 
+/*
+ * The three type helpers below are DEFAULTS that component styles refine, so
+ * they are written at zero specificity with :where().
+ *
+ * Without it they are plain single-class selectors living in a stylesheet that
+ * the bundler emits after every CSS Module, so on any element carrying both a
+ * helper and a module class — `class="utility styles.eyebrow"` — the helper
+ * quietly wins every shared property. Keep new declarations inside :where().
+ */
+
 /* Display type: Anybody is a variable-width face — the wide axis is what
    gives the headings their faceted, pressed-outward look. */
-.display {
+:where(.display) {
   font-family: var(--display);
   font-variation-settings: 'wdth' 112;
   font-weight: 800;
@@ -86,7 +104,7 @@ input {
 }
 
 /* Utility type: depth readouts, labels, status pills. */
-.utility {
+:where(.utility) {
   font-family: var(--utility);
   font-size: var(--step--1);
   font-weight: 500;
@@ -95,7 +113,7 @@ input {
   line-height: 1.4;
 }
 
-.lede {
+:where(.lede) {
   font-size: var(--step-1);
   line-height: 1.5;
   color: var(--fathom);

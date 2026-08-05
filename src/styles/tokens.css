@@ -44,6 +44,13 @@
   --step-3: clamp(2rem, 1.55rem + 2vw, 3.2rem);
   --step-4: clamp(2.9rem, 1.9rem + 4.6vw, 6.4rem);
 
+  /* Small-caps label sizes, for the Martian Mono eyebrows, pills and readouts.
+     That face runs wide and is always tracked out, so it sits below the body
+     scale — but not as far below as its raw numbers suggest. */
+  --label-sm: 0.68rem;
+  --label: 0.72rem;
+  --label-lg: 0.78rem;
+
   /* Rhythm */
   --gutter: clamp(1.25rem, 4vw, 3rem);
   --measure: 62ch;
@@ -58,4 +65,12 @@
   /* Scroll progress, 0 at the surface and 1 at the seabed.
      Set from JS on <html>; the background layers read it. */
   --descent: 0;
+}
+
+/* On a phone the vh-based section rhythm eats most of a screen between
+   sections, so the page reads as gaps with content in them. */
+@media (max-width: 600px) {
+  :root {
+    --section-y: 4.25rem;
+  }
 }

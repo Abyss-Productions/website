@@ -64,8 +64,8 @@
   align-items: center;
   gap: 0.85rem;
   color: var(--shard);
-  font-size: 0.6rem;
-  letter-spacing: 0.24em;
+  font-size: var(--label);
+  letter-spacing: 0.2em;
 }
 
 .eyebrowRule {
@@ -106,7 +106,9 @@
 .status {
   display: flex;
   flex-wrap: wrap;
-  gap: 0 clamp(1.25rem, 3.5vw, 2.75rem);
+  /* Row gap matters: these wrap onto a second line well before phone widths,
+     and with none they collide into each other's labels. */
+  gap: 1.15rem clamp(1.25rem, 3.5vw, 2.75rem);
   margin-top: clamp(0.75rem, 3vh, 2rem);
   padding-top: 1.35rem;
   border-top: 1px solid var(--edge);
@@ -120,14 +122,14 @@
 }
 
 .statusLabel {
-  font-size: 0.5rem;
-  letter-spacing: 0.2em;
+  font-size: var(--label-sm);
+  letter-spacing: 0.18em;
   color: var(--fathom-dim);
 }
 
 .statusValue {
-  font-size: 0.66rem;
-  letter-spacing: 0.1em;
+  font-size: var(--label-lg);
+  letter-spacing: 0.08em;
   color: var(--lumen);
 }
 
@@ -137,6 +139,12 @@
   display: grid;
   place-items: center;
   isolation: isolate;
+  /* The bloom below is inset -14%, so it is wider than this box and would push
+     the page out at any width where the stage reaches the viewport edge. Clip
+     it horizontally only — it still needs to bleed above and below the shard.
+     Both gradients are fully transparent by the time they reach these edges,
+     so nothing visible is cut. */
+  overflow-x: clip;
 }
 
 .shard {
@@ -227,11 +235,67 @@
   }
 }
 
-/* At phone widths the eyebrow wraps, which leaves the rule stranded beside a
-   two-line label. */
 @media (max-width: 600px) {
+  /* Centred on a phone: the shard sits above the copy, so a centre axis reads
+     as one column rather than a left-aligned block under a centred image. */
+  .copy {
+    justify-items: center;
+    text-align: center;
+  }
+
+  /* The eyebrow wraps here, which strands the rule beside a two-line label and
+     leaves "iOS" alone on the second line. Tighter tracking keeps it on one. */
   .eyebrowRule {
     display: none;
+  }
+
+  .eyebrow {
+    font-size: var(--label-sm);
+    letter-spacing: 0.11em;
+  }
+
+  /* Stacked rows, label against value — the same instrument-panel reading as
+     the studio record, rather than columns wrapping into each other. */
+  .status {
+    display: grid;
+    gap: 0;
+    padding-top: 0.35rem;
+  }
+
+  .statusItem {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-block: 0.8rem;
+    border-bottom: 1px dashed rgb(169 232 255 / 0.09);
+  }
+
+  .statusItem:last-child {
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  /* The readout stays a table. Label against value is what makes it scannable,
+     so it keeps its own edges while everything around it centres. */
+  .statusLabel {
+    text-align: left;
+  }
+
+  .statusValue {
+    text-align: right;
+  }
+
+  /* Two buttons of different natural widths read as ragged when stacked, and
+     are small tap targets. Full width, centred. */
+  .actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+
+  .actions > * {
+    justify-content: center;
   }
 }
 

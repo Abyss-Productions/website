@@ -64,9 +64,15 @@ the readout, fill and marker. Below 900px it collapses to a progress hairline ac
 - Motion respects `prefers-reduced-motion`; the entrance sequence, motes and scroll reveals all
   stand down.
 
-One CSS note worth keeping in mind: the ambient backdrop is a fixed layer at `z-index: 0`, so any
-new top-level content block needs to be positioned (`main` is, in `global.css`) or it will paint
-underneath it.
+Two CSS notes worth keeping in mind:
+
+- The ambient backdrop is a fixed layer at `z-index: 0`, so any new top-level content block needs to
+  be positioned (`main` is, in `global.css`) or it will paint underneath it.
+- The `.display`, `.utility` and `.lede` helpers in `global.css` are wrapped in `:where()` so they
+  carry no specificity. They are defaults that component styles refine, and elements routinely carry
+  both — `className={`utility ${styles.eyebrow}`}`. Without `:where()` the helper is a single-class
+  selector in a stylesheet the bundler emits *after* every CSS Module, so it silently wins every
+  property the two share. Keep new declarations in those blocks inside the `:where()`.
 
 ## Deploying
 
