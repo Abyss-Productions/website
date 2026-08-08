@@ -13,6 +13,7 @@
  *   4. Have someone qualified check it if you take payments or collect accounts.
  */
 
+import { Link } from 'react-router-dom'
 import { site } from '../data/site'
 import { Article } from './Article'
 
@@ -28,6 +29,19 @@ export function Privacy() {
         what the apps collect, why, and who else can see it. Plain summary:{' '}
         <strong>we do not want your personal data and we collect as little as we can.</strong>
       </p>
+
+      <h2>Policies for individual games</h2>
+      <p>
+        A game that ships advertising or in-app purchases collects more than this page describes, so
+        it carries its own policy. Where the two disagree, the game's own policy is the one that
+        governs that game.
+      </p>
+      <ul>
+        <li>
+          <Link to="/privacy/color-cargo">Color Cargo</Link> — ad-supported, with optional in-app
+          purchases.
+        </li>
+      </ul>
 
       <h2>What we collect</h2>
       <ul>
@@ -53,9 +67,13 @@ export function Privacy() {
 
       <h2>What we do not do</h2>
       <ul>
-        <li>We do not sell or rent personal data.</li>
-        <li>We do not build advertising profiles or share data with data brokers.</li>
+        <li>We do not sell personal data for money.</li>
+        <li>We do not share data with data brokers.</li>
         <li>We do not ask for contacts, photos, or precise location.</li>
+        <li>
+          We do not run advertising in a game unless that game's own policy says so and its store
+          listing declares it.
+        </li>
       </ul>
 
       <h2>Services we rely on</h2>
@@ -74,6 +92,10 @@ export function Privacy() {
         <li>
           <strong>Crash and analytics providers</strong> — named in each game's store listing under
           Data safety.
+        </li>
+        <li>
+          <strong>Advertising partners</strong> — only in games that show ads, and named in that
+          game's own policy.
         </li>
       </ul>
 

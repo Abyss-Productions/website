@@ -6,6 +6,7 @@ import { Footer } from './components/Footer'
 import { Header } from './components/Header'
 import { site, strata } from './data/site'
 import { useDescent } from './hooks/useDescent'
+import { ColorCargoPrivacy } from './pages/ColorCargoPrivacy'
 import { Home } from './pages/Home'
 import { NotFound } from './pages/NotFound'
 import { Privacy } from './pages/Privacy'
@@ -15,6 +16,7 @@ const TITLES: Record<string, string> = {
   '/': `${site.name} — ${site.role}`,
   '/support': `Player support — ${site.name}`,
   '/privacy': `Privacy policy — ${site.name}`,
+  '/privacy/color-cargo': `Color Cargo privacy policy — ${site.name}`,
 }
 
 // Module scope, so each identity is stable across renders.
@@ -69,6 +71,7 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/support" element={<Support />} />
           <Route path="/privacy" element={<Privacy />} />
+          <Route path="/privacy/color-cargo" element={<ColorCargoPrivacy />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>

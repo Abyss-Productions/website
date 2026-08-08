@@ -1,8 +1,9 @@
 /**
  * The game catalogue.
  *
- * The three entries below are placeholders so the layout can be judged with
- * real-shaped content — replace them with your titles.
+ * Color Cargo is a real title. The two entries after it are still placeholders
+ * so the layout can be judged with real-shaped content — replace them as the
+ * titles firm up.
  *
  * status:
  *   'development' — announced, not playable yet
@@ -31,13 +32,13 @@ export interface Game {
 
 export const games: Game[] = [
   {
-    id: 'shardfall',
-    title: 'Shardfall',
-    genre: 'Roguelite deck-builder',
+    id: 'color-cargo',
+    title: 'Color Cargo',
+    genre: 'Colour-matching puzzler',
     blurb:
-      'Descend a fracturing crystal shelf one room at a time. Every card you keep makes the shelf less stable, so the deck that gets you deepest is the one that nearly kills you.',
-    status: 'development',
-    window: 'Winter 2026',
+      'Load each truck with the boxes that match its colour. Only the front box of a column will move, and the handful of holding spots between the grid and the truck are the whole game — fill them with the wrong colour and the level is over.',
+    status: 'testing',
+    window: 'In testing on Google Play',
   },
   {
     id: 'deepline',

@@ -49,6 +49,9 @@ export const site = {
     general: "hello@abyssproductions.com",
     support: "support@abyssproductions.com",
     press: "press@abyssproductions.com",
+    // Printed in the game privacy policies and handed to Google Play as the
+    // data-deletion contact, so this address has to stay monitored.
+    privacy: "ahmadghani44452@gmail.com",
   },
 
   // Storefronts. Fill these in as each listing goes live.
@@ -68,6 +71,9 @@ export const site = {
   legal: {
     entity: "Abyss Productions",
     privacyUpdated: "5 August 2026",
+    // Per-game policies carry their own date. Bump it whenever the policy for
+    // that game changes — the store listing is checked against it.
+    colorCargoUpdated: "8 August 2026",
   },
 };
 

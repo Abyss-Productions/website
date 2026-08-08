@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Replace the domain when the real one is live. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://abyssproductions.com/</loc>
+    <loc>https://abyss.productions/</loc>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://abyssproductions.com/support</loc>
+    <loc>https://abyss.productions/support</loc>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://abyssproductions.com/privacy</loc>
+    <loc>https://abyss.productions/privacy</loc>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://abyss.productions/privacy/color-cargo</loc>
     <priority>0.3</priority>
   </url>
 </urlset>

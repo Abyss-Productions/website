@@ -85,8 +85,9 @@ The build output in `dist/` is static. Because routing is client-side, the host 
 - **Vercel** — `vercel.json` is already set up.
 - **GitHub Pages / plain nginx** — add your own rewrite to `index.html`.
 
-Before going live, replace the placeholder domain `abyssproductions.com` in `index.html`
-(`og:url`, `og:image`), `public/robots.txt` and `public/sitemap.xml`.
+The domain is `abyss.productions`. It appears in `index.html` (`og:url`, `og:image`),
+`public/robots.txt`, `public/sitemap.xml` and `site.domain` — change all four together if it
+ever moves.
 
 ## Store listing checklist
 

@@ -55,6 +55,10 @@
   text-transform: uppercase;
   color: var(--lumen);
   margin-top: 1.75rem;
+  /* Linked sections — the deletion anchor Play Console is given, and the
+     cross-references inside the game policies — otherwise land underneath the
+     sticky header, which hides the heading you jumped to. */
+  scroll-margin-top: 6rem;
 }
 
 .body h2:first-of-type {
